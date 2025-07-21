@@ -8,61 +8,102 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  
   TextEditingController controller = TextEditingController();
   bool? isChecked = false;
   bool isSwitched = false;
+  double sliderValue = 0.0;
+  String? menuItem = 'e1';
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            controller: controller,
-            decoration: InputDecoration(border: OutlineInputBorder()),
-            onEditingComplete: () {
-              setState(() {});
-            },
-          ),
-          Text(controller.text),
-          Checkbox(
-            value: isChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                isChecked = value;
-              });
-            },
-          ),
-          CheckboxListTile(
-            title: Text("Touch me!"),
-            value: isChecked,
-            onChanged: (value) {
-              setState(() {
-                isChecked = value;
-              });
-            },
-          ),
-          Switch(
-            value: isSwitched,
-            onChanged: (value) {
-              setState(() {
-                isSwitched = value;
-              });
-            },
-          ),
-          SwitchListTile(
-            title: Text("Wanna touch?"),
-            value: isSwitched,
-            onChanged: (value) {
-              setState(() {
-                isSwitched = value;
-              });
-            },
-          ),
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: controller,
+              decoration: InputDecoration(border: OutlineInputBorder()),
+              onEditingComplete: () {
+                setState(() {});
+              },
+            ),
+            Text(controller.text),
+            Checkbox(
+              value: isChecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  isChecked = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Touch me!"),
+              value: isChecked,
+              onChanged: (value) {
+                setState(() {
+                  isChecked = value;
+                });
+              },
+            ),
+            Switch(
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                });
+              },
+            ),
+            SwitchListTile(
+              title: Text("Wanna touch?"),
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                });
+              },
+            ),
+            Slider(
+              max: 100,
+              divisions: 10,
+              value: sliderValue,
+              onChanged: (value) {
+                setState(() {
+                  sliderValue = value;
+                });
+              },
+            ),
+            InkWell(
+              splashColor: Colors.purpleAccent,
+              onTap: () {
+              },
+              child: Container(width: double.infinity, height: 50),
+            ),
+            ElevatedButton(
+              onPressed: () {
+              },
+              child: Text("Tap me"),
+            ),
+            FilledButton(
+              onPressed: () {
+              },
+              child: Text("Tap me"),
+            ),
+            TextButton(
+              onPressed: () {
+              },
+              child: Text("Tap me"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+              },
+              child: Text("Tap me"),
+            ),
+            CloseButton(),
+            BackButton(),
+          ],
+        ),
       ),
     );
   }
