@@ -31,8 +31,9 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 30.0),
             TextField(
               controller: emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintText: "Email",
+                labelText: "Email",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               controller: passwordController,
               decoration: InputDecoration(
-                hintText: "Password",
+                labelText: "Password",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
