@@ -1,109 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_canvas/data/notifiers.dart';
+import 'package:flutter_canvas/views/pages/welcome_page.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  TextEditingController controller = TextEditingController();
-  bool? isChecked = false;
-  bool isSwitched = false;
-  double sliderValue = 0.0;
-  String? menuItem = 'e1';
-
-  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: controller,
-              decoration: InputDecoration(border: OutlineInputBorder()),
-              onEditingComplete: () {
-                setState(() {});
-              },
-            ),
-            Text(controller.text),
-            Checkbox(
-              value: isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  isChecked = value;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Touch me!"),
-              value: isChecked,
-              onChanged: (value) {
-                setState(() {
-                  isChecked = value;
-                });
-              },
-            ),
-            Switch(
-              value: isSwitched,
-              onChanged: (value) {
-                setState(() {
-                  isSwitched = value;
-                });
-              },
-            ),
-            SwitchListTile(
-              title: Text("Wanna touch?"),
-              value: isSwitched,
-              onChanged: (value) {
-                setState(() {
-                  isSwitched = value;
-                });
-              },
-            ),
-            Slider(
-              max: 100,
-              divisions: 10,
-              value: sliderValue,
-              onChanged: (value) {
-                setState(() {
-                  sliderValue = value;
-                });
-              },
-            ),
-            InkWell(
-              splashColor: Colors.purpleAccent,
-              onTap: () {
-              },
-              child: Container(width: double.infinity, height: 50),
-            ),
-            ElevatedButton(
-              onPressed: () {
-              },
-              child: Text("Tap me"),
-            ),
-            FilledButton(
-              onPressed: () {
-              },
-              child: Text("Tap me"),
-            ),
-            TextButton(
-              onPressed: () {
-              },
-              child: Text("Tap me"),
-            ),
-            OutlinedButton(
-              onPressed: () {
-              },
-              child: Text("Tap me"),
-            ),
-            CloseButton(),
-            BackButton(),
-          ],
-        ),
+    return Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(seconds: 1),
+                      content: Text("This is the snackbar"),
+                    ),
+                  );
+                },
+                child: Text("Show snackbar"),
+              ),
+              SizedBox(
+                height: 20.0,
+                child: VerticalDivider(),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Alert title"),
+                        content: Text("Alert Content"),
+                        actions: [
+                          FilledButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Text("Show snackbar"),
+              ),
+            ],
+          ),
+          ListTile(
+            title: Text("Log out"),
+            onTap: () {
+              selectedpageNotifier.value = 0;
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return WelcomePage();
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
